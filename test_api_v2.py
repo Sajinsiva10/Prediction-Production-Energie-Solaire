@@ -8,26 +8,24 @@ import pandas as pd
 
 BASE_URL = "http://127.0.0.1:5000"
 
-print("="*60)
-print("🧪 TESTS DE L'API FLASK - VERSION CORRIGÉE")
-print("="*60)
+
 
 # ============================================
 # ÉTAPE 1 : Récupérer les features exactes
 # ============================================
-print("\n📍 Récupération des features requises...")
+print("\nRécupération des features requises")
 print("-"*60)
 response = requests.get(f"{BASE_URL}/info")
 features_required = response.json()['features_required']
 
-print(f"✅ {len(features_required)} features requises :")
+print(f"{len(features_required)} features requises :")
 for i, feat in enumerate(features_required, 1):
     print(f"   {i:2d}. {feat}")
 
 # ============================================
 # ÉTAPE 2 : Charger une vraie ligne de données
 # ============================================
-print("\n📍 Chargement d'une vraie observation...")
+print("\nChargement d'une vraie observation")
 print("-"*60)
 
 # Charger le dataset
@@ -39,12 +37,12 @@ y = df['generated_power_kw']
 sample_data = X.iloc[0].to_dict()
 real_value = y.iloc[0]
 
-print(f"✅ Observation chargée (valeur réelle : {real_value:.2f} kW)")
+print(f"Observation chargée (valeur réelle : {real_value:.2f} kW)")
 
 # ============================================
 # TEST 1 : Prédiction avec données réelles
 # ============================================
-print("\n📍 TEST 1 : POST /predict - Données réelles")
+print("\nTEST 1 : POST /predict - Données réelles")
 print("-"*60)
 
 response = requests.post(f"{BASE_URL}/predict", json=sample_data)
@@ -65,7 +63,7 @@ else:
 # ============================================
 # TEST 2 : Scénario IDÉAL (conditions optimales)
 # ============================================
-print("\n📍 TEST 2 : POST /predict - ☀️ Scénario IDÉAL")
+print("\n TEST 2 : POST /predict - Scénario IDÉAL")
 print("-"*60)
 
 # Partir d'une vraie ligne et modifier les valeurs clés
@@ -88,15 +86,15 @@ print(f"Status Code : {response.status_code}")
 
 if response.status_code == 200:
     result = response.json()
-    print(f"\n☀️ Production prévue (conditions idéales) : {result['prediction']['value']:.2f} kW")
+    print(f"\nProduction prévue (conditions idéales) : {result['prediction']['value']:.2f} kW")
 else:
     error = response.json()
-    print(f"❌ Erreur : {error}")
+    print(f" Erreur : {error}")
 
 # ============================================
 # TEST 3 : Scénario DÉFAVORABLE
 # ============================================
-print("\n📍 TEST 3 : POST /predict - ☁️ Scénario DÉFAVORABLE")
+print("\nTEST 3 : POST /predict - ☁️ Scénario DÉFAVORABLE")
 print("-"*60)
 
 bad_data = X.iloc[0].to_dict()
@@ -121,12 +119,12 @@ if response.status_code == 200:
     print(f"\n☁️ Production prévue (conditions défavorables) : {result['prediction']['value']:.2f} kW")
 else:
     error = response.json()
-    print(f"❌ Erreur : {error}")
+    print(f" Erreur : {error}")
 
 # ============================================
 # TEST 4 : Plusieurs prédictions
 # ============================================
-print("\n📍 TEST 4 : POST /predict - 5 prédictions aléatoires")
+print("\n TEST 4 : POST /predict - 5 prédictions aléatoires")
 print("-"*60)
 
 sample_indices = [0, 100, 500, 1000, 2000]
@@ -145,11 +143,11 @@ for idx in sample_indices:
         print(f"   Obs {idx:4d} : Réel={real:7.2f} kW | Prédit={predicted:7.2f} kW | Erreur={error:6.2f} kW")
 
 if errors:
-    print(f"\n📊 Statistiques :")
+    print(f"\nStatistiques :")
     print(f"   MAE moyenne : {sum(errors) / len(errors):.2f} kW")
     print(f"   Erreur min  : {min(errors):.2f} kW")
     print(f"   Erreur max  : {max(errors):.2f} kW")
 
 print("\n" + "="*60)
-print("✅ TOUS LES TESTS TERMINÉS !")
+print("TOUS LES TESTS TERMINÉS !")
 print("="*60)
