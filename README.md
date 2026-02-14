@@ -70,6 +70,9 @@ print(response.json())
 ```bash
 python test_api_v2.py
 ```
+```bash
+python interface_utilisateur.py
+```
 
 ## 📈 Features Importantes
 
@@ -89,7 +92,6 @@ python test_api_v2.py
 |--------|----------|-----------|-----|
 | **XGBoost** | **263.74** | **408.66** | **0.8172** |
 | Random Forest | 296.18 | 423.73 | 0.8034 |
-| KNN | 349.55 | 498.84 | 0.7276 |
 | Linear Regression | 451.59 | 564.50 | 0.6512 |
 
 ### Scénarios de Production
