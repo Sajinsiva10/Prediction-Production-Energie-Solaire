@@ -22,7 +22,7 @@ Projet de Machine Learning pour prédire la production d'énergie solaire à par
 - Export : `cleaned_data.csv`
 
 ### 2️⃣ Modeling (`02_modeling.ipynb`)
-- Comparaison de 4 modèles : Linear Regression, Random Forest, XGBoost, KNN
+- Comparaison de 3 modèles : Linear Regression, Random Forest, XGBoost
 - Optimisation des hyperparamètres (GridSearchCV)
 - Sélection du meilleur modèle (XGBoost)
 - Export : `best_model_xgboost.pkl`
